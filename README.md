@@ -1,14 +1,19 @@
 # ppm-viewer
 Simple [PPM](https://en.wikipedia.org/wiki/Netpbm) Image Viewer in JavaFX 
 
-This is a small utility I made in preparation for the [Ray Tracng in One Weekend](https://raytracing.github.io/) course.
+This is a small utility I made in preparation for the [Ray Tracing in One Weekend](https://raytracing.github.io/) course.
 
 I couldn't find an easy way to view PPM files on Windows 10, so I figured I would try learning some JavaFX and create my
 own viewer. 
 
-It's super simple and I don't plan on doing anything crazy with it. This is mostly an educational exercise.
+It's super simple, and I don't plan on doing anything crazy with it. This is mostly an educational exercise.
 
 With that being said, if you have the patience to explain something I'm doing poorly, I would appreciate the feedback.
+
+Note: I'm not experienced with IDEs, so I have no idea how to deal with libraries going on github. I'm just .gitignoring 
+them right now.
+
+This is using Java 13 and JavaFX SDK 14.0.1.
 
 ## Features
 
