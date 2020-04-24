@@ -39,7 +39,6 @@ public class ViewerUpdateThread extends Thread {
                 key.reset();
             }
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
             return;
         }
     }

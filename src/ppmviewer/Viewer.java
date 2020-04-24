@@ -89,6 +89,13 @@ public class Viewer extends Application {
         primaryStage.show();
     }
 
+    @Override
+    public void stop() {
+        if (viewerUpdateThread != null) {
+            viewerUpdateThread.interrupt();
+        }
+    }
+
     private File getPpmFile() {
         FileChooser imageChooser = new FileChooser();
         imageChooser.setTitle("Open Image");
