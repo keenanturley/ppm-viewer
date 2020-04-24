@@ -1,14 +1,11 @@
 package ppmviewer;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;
@@ -18,7 +15,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.text.View;
 import java.io.File;
 
 public class Viewer extends Application {
@@ -27,7 +23,7 @@ public class Viewer extends Application {
     private ViewerUpdateThread viewerUpdateThread;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         this.primaryStage = stage;
         primaryStage.setTitle("PPM Viewer");
         VBox root = new VBox();
@@ -49,31 +45,25 @@ public class Viewer extends Application {
         imageView.setSmooth(true);
 
         // Set up drag and drop for image viewer
-        root.setOnDragOver(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                if (db.hasFiles()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
+        root.setOnDragOver(event -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasFiles()) {
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
             }
+            event.consume();
         });
-        root.setOnDragDropped(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasFiles()) {
-                    File firstFile = db.getFiles().get(0);
-                    if (firstFile.canRead() && firstFile.getPath().toLowerCase().endsWith(".ppm")) {
-                        bindImageFileToViewer(firstFile);
-                        success = true;
-                    }
+        root.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasFiles()) {
+                File firstFile = db.getFiles().get(0);
+                if (firstFile.canRead() && firstFile.getPath().toLowerCase().endsWith(".ppm")) {
+                    bindImageFileToViewer(firstFile);
+                    success = true;
                 }
-                event.setDropCompleted(success);
-                event.consume();
             }
+            event.setDropCompleted(success);
+            event.consume();
         });
 
         // Set open image action

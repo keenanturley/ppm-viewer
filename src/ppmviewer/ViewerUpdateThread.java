@@ -11,7 +11,7 @@ import java.nio.file.*;
  */
 public class ViewerUpdateThread extends Thread {
     private final ImageView imageView;
-    private File imageFile;
+    private final File imageFile;
 
     public ViewerUpdateThread(ImageView imageView, File imageFile) {
         this.imageView = imageView;
@@ -38,8 +38,7 @@ public class ViewerUpdateThread extends Thread {
                 }
                 key.reset();
             }
-        } catch (IOException | InterruptedException e) {
-            return;
+        } catch (IOException | InterruptedException ignored) {
         }
     }
 }
